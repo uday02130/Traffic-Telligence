@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Volume Estimation</title>
+    <style>
+        body {
+            background-image: url("https://cdn.vox-cdn.com/thumbor/voARJfEkVTp61MSzW3EXPne6TDM=/0x78:3000x1766/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/44219366/72499026.0.0.jpg");
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: black;
+            margin: 40px;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            margin: 6px 0 12px;
+            padding: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="container">
+            <h2>Traffic Volume Estimation</h2>
+            <form action="{{ url_for('predict') }}" method="post">
+                <label for="holiday">Holiday:</label>
+                <select id="holiday" name="holiday" required>
+                    <option value=7>None</option>
+                    <option value=1>Columbus Day</option>
+                    <option value=12>Veterans Day</option>
+                    <option value=9>Thanksgiving Day</option>
+                    <option value=8>Christmas Day</option>
+                    <option value=6>New Years Day</option>
+                    <option value=11>Washington's Birthday</option>
+                    <option value=5>Memorial Day</option>
+                    <option value=2>Independence Day</option>
+                    <option value=3>State Fair</option>
+                    <option value=13>Labor Day</option>
+                    <option value=4>Martin Luther King Jr Day</option>
+                </select>
+
+                <label>Temp (°C):</label>
+                <input type="number" name="temp" required placeholder="Temperature">
+
+                <label>Rain (0 or 1):</label>
+                <input type="number" name="rain" min="0" max="1" required>
+
+                <label>Snow (0 or 1):</label>
+                <input type="number" name="snow" min="0" max="1" required>
+
+                <label>Weather:</label>
+                <select name="weather" required>
+                    <option value=1>Clouds</option>
+                    <option value=0>Clear</option>
+                    <option value=3>Rain</option>
+                    <option value=2>Drizzle</option>
+                    <option value=45>Mist</option>
+                    <option value=43>Fog</option>
+                    <option value=18>Thunderstorm</option>
+                    <option value=8>Smoke</option>
+                    <option value=9>Squall</option>
+                    <option value=7>Haze</option>
+                </select>
+
+                <label>Year:</label>
+                <input type="number" name="year" min="2012" max="2024" required>
+
+                <label>Month:</label>
+                <input type="number" name="month" min="1" max="12" required>
+
+                <label>Day:</label>
+                <input type="number" name="day" min="1" max="31" required>
+
+                <label>Hour:</label>
+                <input type="number" name="hours" min="0" max="23" required>
+
+                <label>Minute:</label>
+                <input type="number" name="minutes" min="0" max="59" required>
+
+                <label>Second:</label>
+                <input type="number" name="seconds" min="0" max="59" required>
+
+                <button type="submit">Predict</button>
+            </form>
+            <br>
+            <div style="font-weight: bold; font-size: 18px;">
+                {{ prediction_text }}
+            </div>
+        </div>
+    </center>
+</body>
+</html>
